@@ -1,8 +1,13 @@
+"use client";
+
+import { useState } from "react";
+
 export default function TaskModal({ mode, task, onClose, onSave, onDelete, onEdit }) {
+  // TODO  : Tambahkan state untuk menyimpan isian form sementara
+
   function handleSubmit(event) {
-    event.preventDefault();
-    // TODO: Ambil data form dan teruskan ke fungsi CRUD di TodoApp.
-    onSave();
+      // TODO  : Ambil data form dan teruskan ke fungsi saveTask di TodoApp
+
   }
 
   return (
@@ -42,7 +47,8 @@ export default function TaskModal({ mode, task, onClose, onSave, onDelete, onEdi
               <input
                 autoFocus
                 required
-                defaultValue={mode === "edit" ? task?.title : ""}
+                value={title}
+                onChange={(event) => setTitle(event.target.value)}
                 placeholder="Contoh: Belajar Next.js"
               />
             </label>
@@ -50,13 +56,14 @@ export default function TaskModal({ mode, task, onClose, onSave, onDelete, onEdi
               Deskripsi
               <textarea
                 rows={3}
-                defaultValue={mode === "edit" ? task?.description : ""}
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
                 placeholder="Catatan singkat tentang tugas"
               />
             </label>
             <label className="form-field">
               Prioritas
-              <select defaultValue={mode === "edit" ? task?.priority : "Biasa"}>
+              <select value={priority} onChange={(event) => setPriority(event.target.value)}>
                 <option value="Penting">Penting</option>
                 <option value="Biasa">Biasa</option>
               </select>

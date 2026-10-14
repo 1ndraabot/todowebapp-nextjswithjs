@@ -6,7 +6,7 @@ import TaskModal from "./TaskModal";
 const STORAGE_KEY = "to-do-next-tasks";
 
 export default function TodoApp() {
-  // TODO: Gunakan state ini untuk mengelola daftar tugas sesuai materi CRUD.
+  // PERSIAPAN: Gunakan state ini untuk mengelola daftar tugas sesuai materi CRUD.
   const [tasks, setTasks] = useState([]);
   const [modalState, setModalState] = useState({
     isOpen: false,
@@ -15,39 +15,39 @@ export default function TodoApp() {
   });
 
   function saveTask(values) {
-    // TODO: Tambahkan atau perbarui tugas berdasarkan mode modal.
+    // TODO 1 : Tambahkan atau perbarui tugas berdasarkan mode modal.
   }
 
   function deleteTask(taskToDelete) {
-    // TODO: Hapus tugas yang dipilih.
+    // TODO 2: Hapus tugas yang dipilih.
   }
 
   function toggleTask(taskId) {
-    // TODO: Ubah status selesai tugas.
+    // TODO 3: Ubah status selesai tugas.
   }
 
   function openCreateModal() {
-    // TODO: Buka modal dalam mode create.
+    // PERSIAPAN: Buka modal dalam mode create.
   }
 
   function openDetailModal(task) {
-    // TODO: Buka modal detail untuk tugas yang dipilih.
+    // PERSIAPAN: Buka modal detail untuk tugas yang dipilih.
   }
 
   function openEditModal(task) {
-    // TODO: Buka modal dalam mode edit untuk tugas yang dipilih.
+    // PERSIAPAN: Buka modal dalam mode edit untuk tugas yang dipilih.
   }
 
   function closeModal() {
-    // TODO: Tutup modal dan atur ulang modalState.
+    // PERSIAPAN Tutup modal dan atur ulang modalState.
   }
 
   useEffect(() => {
-    // TODO: Baca daftar tugas dari localStorage setelah halaman dimuat.
+    // TODO 4: Baca daftar tugas dari localStorage setelah halaman dimuat.
   }, []);
 
   useEffect(() => {
-    // TODO: Simpan daftar tugas ke localStorage setiap kali tasks berubah.
+    // TODO 5: Simpan daftar tugas ke localStorage setiap kali tasks berubah.
   }, []);
 
   return (
