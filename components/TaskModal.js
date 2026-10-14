@@ -1,21 +1,8 @@
-"use client";
-
-import { useState } from "react";
-
 export default function TaskModal({ mode, task, onClose, onSave, onDelete, onEdit }) {
-  // CREATE memakai form kosong. EDIT memakai data tugas yang sudah dipilih.
-  const [title, setTitle] = useState(task?.title || "");
-  const [description, setDescription] = useState(task?.description || "");
-  const [priority, setPriority] = useState(task?.priority || "Biasa");
-
-  // Saat form dikirim, kirim nilainya ke TodoApp untuk disimpan.
   function handleSubmit(event) {
     event.preventDefault();
-    onSave({
-      title: title.trim(),
-      description: description.trim(),
-      priority,
-    });
+    // TODO: Ambil data form dan teruskan ke fungsi CRUD di TodoApp.
+    onSave();
   }
 
   return (
@@ -55,8 +42,7 @@ export default function TaskModal({ mode, task, onClose, onSave, onDelete, onEdi
               <input
                 autoFocus
                 required
-                value={title}
-                onChange={(event) => setTitle(event.target.value)}
+                defaultValue={mode === "edit" ? task?.title : ""}
                 placeholder="Contoh: Belajar Next.js"
               />
             </label>
@@ -64,14 +50,13 @@ export default function TaskModal({ mode, task, onClose, onSave, onDelete, onEdi
               Deskripsi
               <textarea
                 rows={3}
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
+                defaultValue={mode === "edit" ? task?.description : ""}
                 placeholder="Catatan singkat tentang tugas"
               />
             </label>
             <label className="form-field">
               Prioritas
-              <select value={priority} onChange={(event) => setPriority(event.target.value)}>
+              <select defaultValue={mode === "edit" ? task?.priority : "Biasa"}>
                 <option value="Penting">Penting</option>
                 <option value="Biasa">Biasa</option>
               </select>

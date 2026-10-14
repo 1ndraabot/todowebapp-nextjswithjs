@@ -3,12 +3,19 @@
 import { useEffect, useState } from "react";
 import TaskModal from "./TaskModal";
 
+const STORAGE_KEY = "to-do-next-tasks";
+
 export default function TodoApp() {
-  // TODO: Isi dan kelola daftar tugas sesuai materi CRUD.
+  // TODO: Gunakan state ini untuk mengelola daftar tugas sesuai materi CRUD.
+  const [tasks, setTasks] = useState([]);
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    mode: "create",
+    task: null,
+  });
 
   function saveTask(values) {
     // TODO: Tambahkan atau perbarui tugas berdasarkan mode modal.
-    
   }
 
   function deleteTask(taskToDelete) {
@@ -41,7 +48,7 @@ export default function TodoApp() {
 
   useEffect(() => {
     // TODO: Simpan daftar tugas ke localStorage setiap kali tasks berubah.
-  }, [tasks]);
+  }, []);
 
   return (
     <main className="page-shell todo-page">
