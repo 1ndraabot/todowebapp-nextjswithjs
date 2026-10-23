@@ -4,10 +4,18 @@ import { useState } from "react";
 
 export default function TaskModal({ mode, task, onClose, onSave, onDelete, onEdit }) {
   // TODO  : Tambahkan state untuk menyimpan isian form sementara
+  const [title, setTitle] = useState(task?.title || "");
+  const [description, setDescription] = useState(task?.description || "");
+  const [priority, setPriority] = useState(task?.priority || "Biasa");
 
   function handleSubmit(event) {
       // TODO  : Ambil data form dan teruskan ke fungsi saveTask di TodoApp
-
+    event.preventDefault();
+    onSave({
+      title: title.trim(),
+      description: description.trim(),
+      priority,
+    });
   }
 
   return (

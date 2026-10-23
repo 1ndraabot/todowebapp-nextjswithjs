@@ -13,42 +13,76 @@ export default function TodoApp() {
     mode: "create",
     task: null,
   });
+  const [isLoaded, setIsLoaded] = useState(false);
 
   function saveTask(values) {
     // TODO 1 : Tambahkan atau perbarui tugas berdasarkan mode modal.
+    if (modalState.mode === "edit") {
+      const updatedTasks = tasks.map((task) =>
+        task.id === modalState.task.id ? {
+          ...task, ...values
+        } : task
+      );
+      setTasks(updatedTasks);
+    } else {
+      const newTask = {
+        id: Date.now(),
+        ...values,
+        createdAt: new Date().toISOString(),
+        done: false,
+      };
+      setTasks([newTask, ...tasks]);
+    }
+    closeModal();
   }
 
   function deleteTask(taskToDelete) {
     // TODO 2: Hapus tugas yang dipilih.
+    setTasks(tasks.filter((task) => task.id !== taskToDelete.id));
+    closeModal();
   }
 
   function toggleTask(taskId) {
     // TODO 3: Ubah status selesai tugas.
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId ? { ...task, done: !task.done } : task,
+    );
+    setTasks(updatedTasks);
   }
 
   function openCreateModal() {
     // PERSIAPAN: Buka modal dalam mode create.
+    setModalState({ isOpen: true, mode: "create", task: null });
   }
 
   function openDetailModal(task) {
     // PERSIAPAN: Buka modal detail untuk tugas yang dipilih.
+    setModalState({ isOpen: true, mode: "detail", task });
   }
 
   function openEditModal(task) {
     // PERSIAPAN: Buka modal dalam mode edit untuk tugas yang dipilih.
+    setModalState({ isOpen: true, mode: "edit", task });
   }
 
   function closeModal() {
     // PERSIAPAN Tutup modal dan atur ulang modalState.
+    setModalState({ isOpen: false, mode: "create", task: null });
   }
 
   useEffect(() => {
     // TODO 4: Baca daftar tugas dari localStorage setelah halaman dimuat.
+    const savedTasks = localStorage.getItem(STORAGE_KEY);
+    if (savedTasks) setTasks(JSON.parse(savedTasks));
+    setIsLoaded(true);
   }, []);
 
   useEffect(() => {
     // TODO 5: Simpan daftar tugas ke localStorage setiap kali tasks berubah.
-  }, []);
+    if (isLoaded) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+    }
+  }, [tasks, isLoaded]);
 
   return (
     <main className="page-shell todo-page">
